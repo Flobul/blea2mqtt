@@ -34,19 +34,27 @@ function decodeData(peripheral: Peripheral) {
             const result = parser.parse(iter.data)
             if (!result) return;
 
-            let wrappedResult: { result: any; macAddress: any; rssi: number; parser: any; deviceType: string, receivedFrom: string };
+//            let wrappedResult: { result: any; mac: any; RSSI: number; /*parser: any; deviceType: string,*/ receivedFrom: string , Time: string};
+            let wrappedResult: { mac: any; RSSI: number;  receivedFrom: string , Time: string};
 
             wrappedResult = {
-                macAddress: result.macAddress,
-                rssi: peripheral.rssi,
+                Time: (new Date()).toISOString().slice(0,19),
+                mac: result.macAddress,
+                RSSI: peripheral.rssi,
                 receivedFrom: machineName,
-                parser: result.parser,
-                deviceType: result.deviceType,
-                result: result.info
+                /*parser: result.parser,*/
+                /*deviceType: result.deviceType,*/
+                /*result: result.info,*/
             };
 
-            console.info('PUB:', wrappedResult.macAddress, result.info);
-            mqttClient.publish(topic, JSON.stringify(wrappedResult));
+            let resultEnd = {
+                ...wrappedResult,
+                ...result.info
+            };
+
+            const macName = result.deviceType + wrappedResult.mac.slice(6, 12);
+            console.info('PUB:', wrappedResult.mac, resultEnd);
+            mqttClient.publish(topic+'/'+macName, JSON.stringify(resultEnd));
         } catch (error) {
             console.error(error);
         }

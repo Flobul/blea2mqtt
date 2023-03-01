@@ -8,7 +8,7 @@ export const PARSER_NAME = 'xiaomi';
 // Device type dictionary
 // {device type code: device name}
 const xiaomiTypes = {
-  0x01aa: 'LYWSDCGQ', // developed with these, so they should work ok
+  0x01aa: 'MJ_HT_V1', // developed with these, so they should work ok
   0x045b: 'LYWSD02',
   0x055b: 'LYWSD03MMC', // does not broadcast temp & humidity, needs ATC custom firmware
   0x0098: 'HHCCJCY01',

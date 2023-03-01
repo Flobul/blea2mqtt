@@ -75,11 +75,11 @@ export class Parser {
       case EventTypes.temperatureAndHumidity: // temperature & humidity
         const temperature = this.buffer.readInt16LE(dataPosition) / 10;
         const humidity = this.buffer.readUInt16LE(dataPosition + 2) / 10;
-        return { temperature: temperature, humidity: humidity };
+        return { Temperature: temperature, Humidity: humidity };
       case EventTypes.battery:
-        return { battery: this.buffer.readUInt8(dataPosition) };
+        return { Battery: this.buffer.readUInt8(dataPosition) };
       case EventTypes.pressure:
-        return { pressure: this.buffer.readUInt16LE(dataPosition) };
+        return { Pressure: this.buffer.readUInt16LE(dataPosition) };
       default:
         return { unknownData: true };
     }

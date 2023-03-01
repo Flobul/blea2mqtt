@@ -213,43 +213,43 @@ export class MiParser implements ParserProvider {
 
     parseTemperatureEvent(buffer: Buffer, eventOffset: number): Object {
         return {
-            temperature: buffer.readInt16LE(eventOffset + 3) / 10
+            Temperature: buffer.readInt16LE(eventOffset + 3) / 10
         };
     }
 
     parseHumidityEvent(buffer: Buffer, eventOffset: number): Object {
         return {
-            humidity: buffer.readUInt16LE(eventOffset + 3) / 10
+            Humidity: buffer.readUInt16LE(eventOffset + 3) / 10
         };
     }
 
     parseBatteryEvent(buffer: Buffer, eventOffset: number): Object {
         return {
-            battery: buffer.readUInt8(eventOffset + 3)
+            Battery: buffer.readUInt8(eventOffset + 3)
         };
     }
 
     parseTemperatureAndHumidityEvent(buffer: Buffer, eventOffset: number): Object {
         const temperature = buffer.readInt16LE(eventOffset + 3) / 10;
         const humidity = buffer.readUInt16LE(eventOffset + 5) / 10;
-        return {temperature, humidity};
+        return { Temperature: temperature, Humidity: humidity };
     }
 
     parseIlluminanceEvent(buffer: Buffer, eventOffset: number): Object {
         return {
-            illuminance: buffer.readUIntLE(eventOffset + 3, 3)
+            Illuminance: buffer.readUIntLE(eventOffset + 3, 3)
         };
     }
 
     parseConductivity(buffer: Buffer, eventOffset: number): Object {
         return {
-            fertility: buffer.readInt16LE(eventOffset + 3)
+            Fertility: buffer.readInt16LE(eventOffset + 3)
         };
     }
 
     parseMoistureEvent(buffer: Buffer, eventOffset: number): Object {
         return {
-            moisture: buffer.readInt8(eventOffset + 3)
+            Moisture: buffer.readInt8(eventOffset + 3)
         };
     }
 
