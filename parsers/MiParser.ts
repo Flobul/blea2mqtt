@@ -233,7 +233,7 @@ export class MiParser implements ParserProvider {
         const temperature = buffer.readInt16LE(eventOffset + 3) / 10;
         const humidity = buffer.readUInt16LE(eventOffset + 5) / 10;
         const gamma = Math.log(humidity / 100) + 17.27 * temperature / (237.7 + temperature);
-        const dewPoint = (237.7 * gamma / (17.27 - gamma)).toFixed(2);
+        const dewPoint = +(237.7 * gamma / (17.27 - gamma)).toFixed(2);
         return { Temperature: temperature, Humidity: humidity, DewPoint: dewPoint };
     }
 
