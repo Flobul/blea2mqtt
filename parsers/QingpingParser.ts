@@ -49,7 +49,9 @@ export class QingpingParser implements ParserProvider {
             case EventTypes.temperatureAndHumidity: // temperature & humidity
                 const temperature = buffer.readInt16LE(dataPosition) / 10;
                 const humidity = buffer.readUInt16LE(dataPosition + 2) / 10;
-                return { eventType: eventId, Temperature: temperature, Humidity: humidity };
+                const gamma = Math.log(humidity / 100) + 17.27 * temperature / (237.7 + temperature);
+                const dewPoint = (237.7 * gamma / (17.27 - gamma)).toFixed(2);
+                return { eventType: eventId, Temperature: temperature, Humidity: humidity, DewPoint: dewPoint };
             case EventTypes.battery:
                 return { eventType: eventId, Battery: buffer.readUInt8(dataPosition) };
             case EventTypes.pressure:
