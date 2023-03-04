@@ -77,7 +77,7 @@ export class Parser {
         const humidity = this.buffer.readUInt16LE(dataPosition + 2) / 10;
 
         const gamma = Math.log(humidity / 100) + 17.27 * temperature / (237.7 + temperature);
-        const dewPoint = (237.7 * gamma / (17.27 - gamma)).toFixed(2);
+        const dewPoint = +(237.7 * gamma / (17.27 - gamma)).toFixed(2);
         return { Temperature: temperature, Humidity: humidity, DewPoint: dewPoint };
       case EventTypes.battery:
         return { Battery: this.buffer.readUInt8(dataPosition) };
