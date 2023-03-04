@@ -324,7 +324,7 @@ export class Parser {
     const temperature = this.buffer.readInt16LE(this.eventOffset + 3) / 10;
     const humidity = this.buffer.readUInt16LE(this.eventOffset + 5) / 10;
     const gamma = Math.log(humidity / 100) + 17.27 * temperature / (237.7 + temperature);
-    const dewPoint = (237.7 * gamma / (17.27 - gamma)).toFixed(2);
+    const dewPoint = +(237.7 * gamma / (17.27 - gamma)).toFixed(2);
     return { Temperature: temperature, Humidity: humidity, DewPoint: dewPoint };
   }
 
