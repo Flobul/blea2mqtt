@@ -34,17 +34,13 @@ function decodeData(peripheral: Peripheral) {
             const result = parser.parse(iter.data)
             if (!result) return;
 
-//            let wrappedResult: { result: any; mac: any; RSSI: number; /*parser: any; deviceType: string,*/ receivedFrom: string , Time: string};
             let wrappedResult: { mac: any; RSSI: number;  receivedFrom: string , Time: string};
 
             wrappedResult = {
-                Time: (new Date()).toISOString().slice(0,19),
+                Time: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, 19),
                 mac: result.macAddress,
                 RSSI: peripheral.rssi,
                 receivedFrom: machineName,
-                /*parser: result.parser,*/
-                /*deviceType: result.deviceType,*/
-                /*result: result.info,*/
             };
 
             let resultEnd = {
