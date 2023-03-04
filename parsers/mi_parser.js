@@ -304,43 +304,45 @@ export class Parser {
 
   parseTemperatureEvent() {
     return {
-      temperature: this.buffer.readInt16LE(this.eventOffset + 3) / 10
+      Temperature: this.buffer.readInt16LE(this.eventOffset + 3) / 10
     };
   }
 
   parseHumidityEvent() {
     return {
-      humidity: this.buffer.readUInt16LE(this.eventOffset + 3) / 10
+      Humidity: this.buffer.readUInt16LE(this.eventOffset + 3) / 10
     };
   }
 
   parseBatteryEvent() {
     return {
-      battery: this.buffer.readUInt8(this.eventOffset + 3)
+      Battery: this.buffer.readUInt8(this.eventOffset + 3)
     };
   }
 
   parseTemperatureAndHumidityEvent() {
     const temperature = this.buffer.readInt16LE(this.eventOffset + 3) / 10;
     const humidity = this.buffer.readUInt16LE(this.eventOffset + 5) / 10;
-    return { temperature, humidity };
+    const gamma = Math.log(humidity / 100) + 17.27 * temperature / (237.7 + temperature);
+    const dewPoint = (237.7 * gamma / (17.27 - gamma)).toFixed(2);
+    return { Temperature: temperature, Humidity: humidity, DewPoint: dewPoint };
   }
 
   parseIlluminanceEvent() {
     return {
-      illuminance: this.buffer.readUIntLE(this.eventOffset + 3, 3)
+      Illuminance: this.buffer.readUIntLE(this.eventOffset + 3, 3)
     };
   }
 
   parseConductivity() {
     return {
-      fertility: this.buffer.readInt16LE(this.eventOffset + 3)
+      Fertility: this.buffer.readInt16LE(this.eventOffset + 3)
     };
   }
 
   parseMoistureEvent() {
     return {
-      moisture: this.buffer.readInt8(this.eventOffset + 3)
+      Moisture: this.buffer.readInt8(this.eventOffset + 3)
     };
   }
 
