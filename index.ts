@@ -14,8 +14,9 @@ dotenv.config();
 
 const topic = process.env.MQTT_TOPIC || 'ble_sensors';
 const machineName = process.env.MACHINE_NAME || 'needsNameInConfig';
+const port = process.env.MQTT_PORT || 1883;
 
-const mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_HOSTNAME}`, {
+const mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_HOSTNAME}:${port}`, {
     username: process.env.MQTT_USERNAME,
     password: process.env.MQTT_PASSWORD
 });
