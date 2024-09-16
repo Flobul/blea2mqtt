@@ -6,9 +6,10 @@ import noble from '@abandonware/noble'
 import _ from 'lodash';
 import {Peripheral} from '@abandonware/noble';
 import {MiParser} from "./parsers/MiParser";
+import {JaaleeParser} from "./parsers/JaaleeParser";
 import {QingpingParser} from "./parsers/QingpingParser";
 
-const parsers: Array<ParserProvider> = [new MiParser, new QingpingParser];
+const parsers: Array<ParserProvider> = [new MiParser, new JaaleeParser, new QingpingParser];
 
 dotenv.config();
 
