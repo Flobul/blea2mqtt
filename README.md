@@ -23,6 +23,7 @@ A service to read Bluetooth low energy sensors in nodejs.
 - `HHCCJCY01` Mi Flora, also available from a lot of other brands, powered by 1xCR2032
 - `CGDK2`, a newer version of the Mi Thermohygrometer, powered by 1xCR2430
   - For this device to broadcast useful data, a pair to the official `Qingping+` app was needed
+- `JHT`, Jaalee Thermohygrometer, powered by 1xCR2477
 
 ### Getting started
 
@@ -54,6 +55,7 @@ There are a few things to configure in the `.env` file:
 | MQTT_HOSTNAME | Mqtt server location                    |
 | MQTT_USERNAME | Mqtt server user                        |
 | MQTT_PASSWORD | Mqtt server password for the given user |
+| MQTT_PORT     | Mqtt server port                        |
 | MQTT_TOPIC    | Mqtt topic to publish information       |
 | MACHINE_NAME  | Name your data collection node          |
 | BLE_DEBUG     | Shows extra data (all ble broadcasts)   |
